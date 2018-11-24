@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Name: Main Camera Profile
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: 114446447069995448}
+  - {fileID: 114514685842840514}
   - {fileID: 114703308935555050}
   - {fileID: 114882958830300924}
   - {fileID: 114898937488162128}
---- !u!114 &114446447069995448
+--- !u!114 &114514685842840514
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,7 +119,7 @@ MonoBehaviour:
     value: 100
   lift:
     overrideState: 1
-    value: {x: 1, y: 0.74012053, z: 0.75192887, w: 0}
+    value: {x: 1, y: 0.56113386, z: 0.5670356, w: 0}
   gamma:
     overrideState: 1
     value: {x: 1, y: 1, z: 1, w: 0}
