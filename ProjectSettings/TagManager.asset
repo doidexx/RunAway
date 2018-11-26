@@ -18,6 +18,7 @@ TagManager:
   - updater
   - portalR
   - car
+  - garbage
   layers:
   - Default
   - TransparentFX

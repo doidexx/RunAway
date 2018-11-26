@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 504500224}
-  m_IndirectSpecularColor: {r: 0.40217686, g: 0.35911092, b: 0.41638887, a: 1}
+  m_IndirectSpecularColor: {r: 0.40217674, g: 0.35911098, b: 0.41638908, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1861,7 +1861,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 78201bc89bfb4f84ea94cd880e053b3a, type: 3}
       propertyPath: m_TagString
-      value: table
+      value: garbage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78201bc89bfb4f84ea94cd880e053b3a, type: 3}
@@ -2955,7 +2955,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400092, guid: e5e8e919907e0a14388713fb825299b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.58
+      value: 4.25
       objectReference: {fileID: 0}
     - target: {fileID: 400092, guid: e5e8e919907e0a14388713fb825299b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5023,7 +5023,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 78201bc89bfb4f84ea94cd880e053b3a, type: 3}
       propertyPath: m_TagString
-      value: table
+      value: garbage
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 78201bc89bfb4f84ea94cd880e053b3a, type: 3}
       propertyPath: m_Name
@@ -5979,7 +5979,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: da1539d3859eea549a9bdb86915f1b44, type: 3}
       propertyPath: m_TagString
-      value: table
+      value: garbage
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: da1539d3859eea549a9bdb86915f1b44, type: 3}
       propertyPath: m_Name
@@ -7509,7 +7509,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: da1539d3859eea549a9bdb86915f1b44, type: 3}
       propertyPath: m_TagString
-      value: table
+      value: garbage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da1539d3859eea549a9bdb86915f1b44, type: 3}
