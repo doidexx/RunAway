@@ -7,7 +7,7 @@ public class PlayerS2 : MonoBehaviour {
 
 	private Rigidbody playerRB;
 	public GameObject[] prefabs;
-	private GameObject clone;
+	private GameObject clone, car, carB;
     public GameObject liveF, myCanvas, seeker;
     private GameObject[] live, updaters;
 	private Animator playerAni;
@@ -19,6 +19,8 @@ public class PlayerS2 : MonoBehaviour {
     // Use this for initialization
 	void Start () {
 		clone =  null;
+        car = null;
+        carB = null;
 		playerRB =  GetComponent<Rigidbody>();
 		playerAni = GetComponent<Animator>();
         initialD = Vector3.Distance(playerRB.transform.position, seeker.transform.position);
@@ -169,18 +171,28 @@ public class PlayerS2 : MonoBehaviour {
         ////////////////////////////////////Map animation loader/////////////////////////////////////////////////
 		if (WorldScript.load > 4) {
         	clone.transform.position = Vector3.Lerp(clone.transform.position, new Vector3(0, 0, clone.transform.position.z), 0.125f);
+            /////////////////////////////////////Getting cars/////////////////////////////////////////////////////////
+            if (SceneManager.GetActiveScene().buildIndex == 5)
+            {
+                if (clone == prefabs[4]) {
+                    Debug.Log("");
+                    carB = clone.transform.GetChild(0).gameObject;
+                    //////////////////////////////////////moving cars///////////////////////////////////////////////////////
+                    carB.transform.position = Vector3.Lerp(car.transform.position, new Vector3(-5.7f, 3.35f, carB.transform.position.z), 3f);
+                }
+                if (clone == prefabs[5]) {
+                    car = clone.transform.GetChild(0).gameObject;
+                    Debug.Log("car " + car.gameObject.name);
+                    //////////////////////////////////////moving cars///////////////////////////////////////////////////////
+                    car.transform.position = Vector3.Lerp(car.transform.position, new Vector3(7.3f, 3.35f, car.transform.position.z), 3f);
+                }
+            }
 		}
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         Debug.Log(playerAni.GetInteger("state"));
         //////////////////////////////////////Falling off////////////////////////////////////////////////////////
         if (playerRB.transform.position.y <= -10f) {
-            playerRB.transform.position = initial;
-            seeker.transform.position = initialF;
-            lives--;
-            for (int i = 0; i < WorldScript.meter; i++){
-                updaters[i].SetActive(true);
-            }
-            WorldScript.meter = 0;
+            playerReseter();
         }
         /////////////////////////////////////puting lives on screen/////////////////////////////////////////////
         if (lives > 0) {
@@ -195,6 +207,13 @@ public class PlayerS2 : MonoBehaviour {
     void OnCollisionEnter(Collision other){
         if ((other.gameObject.tag == "table" || other.gameObject.tag == "locker") && !bumpT) {
             bumpT = true;
+        }
+        if (other.gameObject.tag == "car" && transform.position.z < other.transform.position.z - 4) {
+            playerAni.SetInteger("state", 9);
+            Debug.Log("state " + playerAni.GetInteger("state"));
+            speed = -1;
+            seekerS = 2f;
+            Invoke("playerReseter", 0.5f);
         }
     }
 
@@ -222,7 +241,12 @@ public class PlayerS2 : MonoBehaviour {
             if (WorldScript.load <= WorldScript.lenght){
                 if (WorldScript.load < WorldScript.lenght) {
                     other.gameObject.SetActive(false);
+                    if (SceneManager.GetActiveScene().buildIndex == 1) {
                     clone = Instantiate(prefabs[Random.Range(1, 11)], new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), WorldScript.load * 44.3f), Quaternion.identity);
+                    }
+                    if (SceneManager.GetActiveScene().buildIndex == 5) {
+                        clone = Instantiate(prefabs[Random.Range(1, 11)], new Vector3(0, -40, WorldScript.load * 44.3f), Quaternion.identity);
+                    }
                     Destroy(other.gameObject);   
                 }
                 if (WorldScript.load == WorldScript.lenght) {
@@ -235,16 +259,6 @@ public class PlayerS2 : MonoBehaviour {
         if (other.gameObject.tag == "deside") {
             deciding = true;
         }
-    }
-
-    void seekerCatch (){
-        SceneManager.LoadScene(2);
-    }
-    void Portal() {
-        SceneManager.LoadScene(3);
-    }
-    void PortalR() {
-        SceneManager.LoadScene(4);
     }
 
 	void OnTriggerExit(Collider other){
@@ -298,4 +312,27 @@ public class PlayerS2 : MonoBehaviour {
 			playerRB.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
 		}
 	}
+
+    void playerReseter() {
+        playerRB.transform.position = initial;
+        seeker.transform.position = initialF;
+        lives--;
+        for (int i = 0; i < WorldScript.meter; i++) {
+            updaters[i].SetActive(true);
+        }
+        playerAni.SetInteger("state", 0);
+        speed = 30f;
+        seekerS = 30f;
+        WorldScript.meter = 0;
+    }
+
+    void seekerCatch() {
+        SceneManager.LoadScene(2);
+    }
+    void Portal() {
+        SceneManager.LoadScene(5);
+    }
+    void PortalR() {
+        SceneManager.LoadScene(5);
+    }
 }

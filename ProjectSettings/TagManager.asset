@@ -17,6 +17,7 @@ TagManager:
   - deside
   - updater
   - portalR
+  - car
   layers:
   - Default
   - TransparentFX
