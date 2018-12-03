@@ -15,7 +15,7 @@ public class PlayerS2 : MonoBehaviour {
     private Vector3 initial, initialF;
 	private float seekerS, speed, jumpSpeed, timer, jumpT, grav, l, c, r, bumpTime, seekerTime, dist, initialD;
 	public int jumpNum, lives;
-	private bool sliding, jumping, falling, movingR, movingL, onFloor, land, leftT, rightT, centerT, canMove, wallR, deciding, bumpT;
+	private bool sliding, jumping, falling, movingR, movingL, onFloor, land, leftT, rightT, centerT, canMove, wallR, deciding, bumpT, chosen;
     // Use this for initialization
 	void Start () {
 		clone =  null;
@@ -33,6 +33,8 @@ public class PlayerS2 : MonoBehaviour {
 		r = 5f;
         lives = 3;
 		centerT = true;
+        chosen = false;
+        deciding = false;
         initial = playerRB.transform.position;
         initialF = seeker.transform.position;
         //////////////////////////////////////////////////Set tracker triggers////////////////////////////////////
@@ -63,6 +65,7 @@ public class PlayerS2 : MonoBehaviour {
             seeker.SetActive(false);
             if (jumping) {
                 deciding = false;
+                chosen = true;
             }
         } else {
             if (!wallR) {
@@ -133,10 +136,10 @@ public class PlayerS2 : MonoBehaviour {
             playerAni.SetInteger("state", 0);
 		}
 		///////////////////////////////////Changing tracks/////////////////////////////////////////////////////
-		if (Input.GetKeyDown(KeyCode.D) && !movingL) {
+        if (Input.GetKeyDown(KeyCode.D) && !movingL && !chosen) {
 			movingR = true;
 		}
-        if (Input.GetKeyDown(KeyCode.A) & !movingR) {
+        if (Input.GetKeyDown(KeyCode.A) && !movingR && !chosen) {
             movingL = true;
         }
 		////////////////////////////////////Stopping on the Right Track///////////////////////////////////////
@@ -146,7 +149,7 @@ public class PlayerS2 : MonoBehaviour {
             movingR = false;
 		}
         ////////////////////////////////////Stopping on the Center Track///////////////////////////////////////
-        if (transform.position.x >= c - 0.2f && transform.position.x <= c + 0.2f && !centerT) {
+        if (transform.position.x >= c - 0.2f && transform.position.x <= c + 0.2f && !centerT && !deciding) {
 			centerT = true;
 			rightT = false;
 			leftT = false;
@@ -300,11 +303,17 @@ public class PlayerS2 : MonoBehaviour {
             playerRB.transform.position = new Vector3(Mathf.Lerp(transform.position.x, c, 0.125f), transform.position.y, transform.position.z);
         }
 		//////////////////////////////////Moving Left/////////////////////////////////////////////////
-        if (centerT & movingL) {
+        if (!deciding && centerT & movingL) {
             playerRB.transform.position = new Vector3(Mathf.Lerp(transform.position.x, l, 0.125f), transform.position.y, transform.position.z);
         }
-		if (leftT & movingR) {
+		if (!deciding && leftT & movingR) {
             playerRB.transform.position = new Vector3(Mathf.Lerp(transform.position.x, c, 0.125f), transform.position.y, transform.position.z);
+        }
+        if (deciding && (leftT || centerT) && movingR) {
+            playerRB.transform.position = new Vector3(Mathf.Lerp(transform.position.x, r, 0.125f), transform.position.y, transform.position.z);
+        }
+        if (deciding && (rightT || centerT) && movingL) {
+            playerRB.transform.position = new Vector3(Mathf.Lerp(transform.position.x, l, 0.125f), transform.position.y, transform.position.z);
         }
         ///////////////////////////////Constant Movement Forward///////////////////////////////////////
         playerRB.MovePosition(playerRB.transform.position += Vector3.forward * speed * Time.deltaTime);
