@@ -16,11 +16,11 @@ public class botoms : MonoBehaviour {
 	}
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(6);
     }
 
 	public void PlayAgain(){
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(0);
 	}
 
 	public void ExitTheGame(){

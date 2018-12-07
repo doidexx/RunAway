@@ -7,7 +7,7 @@ public class PlayerS2 : MonoBehaviour {
 
 	private Rigidbody playerRB;
 	public GameObject[] prefabs;
-	private GameObject clone, car, carB;
+	private GameObject clone, car;
     public GameObject liveF, myCanvas, seeker;
     private GameObject[] live, updaters;
 	private Animator playerAni;
@@ -20,7 +20,6 @@ public class PlayerS2 : MonoBehaviour {
 	void Start () {
 		clone =  null;
         car = null;
-        carB = null;
 		playerRB =  GetComponent<Rigidbody>();
 		playerAni = GetComponent<Animator>();
         initialD = Vector3.Distance(playerRB.transform.position, seeker.transform.position);
@@ -174,22 +173,6 @@ public class PlayerS2 : MonoBehaviour {
         ////////////////////////////////////Map animation loader/////////////////////////////////////////////////
 		if (WorldScript.load > 4) {
         	clone.transform.position = Vector3.Lerp(clone.transform.position, new Vector3(0, 0, clone.transform.position.z), 0.125f);
-            /////////////////////////////////////Getting cars/////////////////////////////////////////////////////////
-            if (SceneManager.GetActiveScene().buildIndex == 5)
-            {
-                if (clone == prefabs[4]) {
-                    Debug.Log("");
-                    carB = clone.transform.GetChild(0).gameObject;
-                    //////////////////////////////////////moving cars///////////////////////////////////////////////////////
-                    carB.transform.position = Vector3.Lerp(car.transform.position, new Vector3(-5.7f, 3.35f, carB.transform.position.z), 3f);
-                }
-                if (clone == prefabs[5]) {
-                    car = clone.transform.GetChild(0).gameObject;
-                    Debug.Log("car " + car.gameObject.name);
-                    //////////////////////////////////////moving cars///////////////////////////////////////////////////////
-                    car.transform.position = Vector3.Lerp(car.transform.position, new Vector3(7.3f, 3.35f, car.transform.position.z), 3f);
-                }
-            }
 		}
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         Debug.Log(playerAni.GetInteger("state"));
@@ -233,10 +216,18 @@ public class PlayerS2 : MonoBehaviour {
             Invoke("seekerCatch", 1);
         }
         if (other.gameObject.tag == "portal") {
+            if (SceneManager.GetActiveScene().buildIndex == 5) {
+                Invoke("Win", 1);
+            } else {
             Invoke("Portal", 0.1f);
+            }
         }
         if (other.gameObject.tag == "portalR") {
+            if (SceneManager.GetActiveScene().buildIndex == 5) {
+                Invoke("Win", 1);
+            } else {
             Invoke("PortalR", 0.1f);
+            }
         }
         if (other.gameObject.tag == "updater") {
             updaters[WorldScript.meter] = other.gameObject;
@@ -253,6 +244,10 @@ public class PlayerS2 : MonoBehaviour {
                     }
                     if (SceneManager.GetActiveScene().buildIndex == 5) {
                         clone = Instantiate(prefabs[Random.Range(1, 11)], new Vector3(0, -40, WorldScript.load * 44.3f), Quaternion.identity);
+                        if (clone.name == "red car(Clone)" || clone.name == "blue car(Clone)") {
+                            car = clone.transform.GetChild(0).gameObject;
+                            Debug.Log(car.name);
+                        }
                     }
                     Destroy(other.gameObject);   
                 }
@@ -296,10 +291,10 @@ public class PlayerS2 : MonoBehaviour {
 	
 	void FixedUpdate() {
 		//////////////////////////////////Moving Right/////////////////////////////////////////////////
-        if (centerT && movingR) {
+        if (centerT && movingR && !deciding) {
             playerRB.transform.position = new Vector3(Mathf.Lerp(transform.position.x, r, 0.125f), transform.position.y, transform.position.z);
 		}
-		if (rightT && movingL) {
+		if (rightT && movingL && !deciding) {
             playerRB.transform.position = new Vector3(Mathf.Lerp(transform.position.x, c, 0.125f), transform.position.y, transform.position.z);
         }
 		//////////////////////////////////Moving Left/////////////////////////////////////////////////
@@ -324,6 +319,15 @@ public class PlayerS2 : MonoBehaviour {
             //playerRB.velocity += Vector3.up * jumpSpeed * Time.deltaTime;
 			playerRB.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
 		}
+        //////////////////////////////////////Moving cars arround/////////////////////////////////////////
+        if (car != null) {
+            if (car.transform.localPosition.x < -6.7f) {
+                car.transform.localPosition = new Vector3(Mathf.Lerp(car.transform.localPosition.x, -6.7f, 0.055f), car.transform.localPosition.y, car.transform.localPosition.z);
+            }
+            if (car.transform.localPosition.x > 7.3f) {
+                car.transform.localPosition = new Vector3(Mathf.Lerp(car.transform.localPosition.x, 7.3f, 0.055f), car.transform.localPosition.y, car.transform.localPosition.z);
+            }
+        }
 	}
 
     void playerReseter() {
@@ -342,10 +346,14 @@ public class PlayerS2 : MonoBehaviour {
     void seekerCatch() {
         SceneManager.LoadScene(2);
     }
+
+    void Win  () {
+        SceneManager.LoadScene(8);
+    }
     void Portal() {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(7);
     }
     void PortalR() {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(7);
     }
 }
