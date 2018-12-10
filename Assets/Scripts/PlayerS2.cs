@@ -194,9 +194,9 @@ public class PlayerS2 : MonoBehaviour {
         if ((other.gameObject.tag == "table" || other.gameObject.tag == "locker") && !bumpT) {
             bumpT = true;
         }
-        if (other.gameObject.tag == "garbage") {
+        if (other.gameObject.tag == "garbage" &&  transform.position.z < other.transform.position.z) {
             bumpT = true;
-            other.rigidbody.AddForce(Vector3.forward * 5, ForceMode.Impulse);
+            other.rigidbody.AddForce(Vector3.forward * 10, ForceMode.Impulse);
         }
         if (other.gameObject.tag == "car" && transform.position.z < other.transform.position.z - 4) {
             playerAni.SetInteger("state", 9);

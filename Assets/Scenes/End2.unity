@@ -221,7 +221,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 70}
-  m_SizeDelta: {x: 219.3, y: 48.8}
+  m_SizeDelta: {x: 219.3, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &313966620
 MonoBehaviour:
@@ -255,7 +255,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You Took the Portal on The right
+  m_Text: 'This Is the end of the Demo
+
+
+    THANKS FOR PLAYING'
 --- !u!222 &313966621
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-D:/Users/Doido/Documents/Unity Builds/RunAway/parkour.exe
+D:/Users/Doido/Documents/Unity Builds/RunAway/RunAway.exe
 SceneListBegin?
 Assets/Scenes/Start.unity
 Assets/Scenes/lv1.unity
@@ -8,6 +8,9 @@ Assets/Scenes/Lose1.unity
 Assets/Scenes/End1.unity
 Assets/Scenes/End2.unity
 Assets/Scenes/lv2.unity
+Assets/Scenes/Story.unity
+Assets/Scenes/Story 1.unity
+Assets/Scenes/Story 2.unity
 SceneListEnd?
 1b12c26398d2a046962ac41a0d452e74 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessLayer
 a225cc34ee7b5f0b51d003f2b05a6a14 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.ColorGrading
@@ -185,6 +188,7 @@ e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSyste
 98d69a140ec0084cde3b6a5e09aea295 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
+6a79bb6073d71fd1efa0a102c34b0d47 Assembly-CSharp.dll:.NextB
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 c1791db8df7a6d30dc3a3e487bced78b Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessVolume
