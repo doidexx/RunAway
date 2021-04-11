@@ -4,21 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Prefab
-  - floor
-  - wall
-  - roof
-  - table
   - locker
-  - empty
-  - portal
-  - loader
-  - player
-  - deside
-  - updater
-  - portalR
-  - car
-  - garbage
+  - Floor
   layers:
   - Default
   - TransparentFX
